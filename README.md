@@ -1,44 +1,4 @@
-# NOTE: DO NOT FORK THIS REPOSITORY. CLONE AND SETUP A STANDALONE REPOSITORY.
 
-# Adbrew Test!
-
-Hello! This test is designed to specifically test your Python, React and web development skills. The task is unconventional and has a slightly contrived setup on purpose and requires you to learn basic concepts of Docker on the fly. 
-
-## What We Built
-
-This project implements a full-stack TODO application with:
-- **React Frontend** (http://localhost:3000): Displays todos and provides a form to create new ones
-- **Django REST API** (http://localhost:8000): Handles GET and POST requests for todos
-- **MongoDB Database** (port 27017): Persists all todo data
-
-### Implementation Summary
-
- **Backend (Django)**: 
-- GET `/todos/` endpoint fetches all todos from MongoDB
-- POST `/todos/` endpoint creates new todos in MongoDB
-- Uses `pymongo` directly (no Django ORM/models)
-- Production-ready error handling and logging
-
- **Frontend (React)**:
-- Custom `useTodos` hook for API logic
-- React Hooks implementation (`useState`, `useEffect`, `useCallback`)
-- Fetches todos on mount from backend
-- Form submission creates todos via POST request
-- Automatically refreshes list after successful creation
-- Loading states and error handling
-
----
-
-# Structure
-
-This repository includes code for a Docker setup with 3 containers:
-* **App**: This is the React dev server and runs on http://localhost:3000. The code for this resides in `src/app` directory.
-* **API**: This is the backend container that runs a Django instance on http://localhost:8000. The code resides in `src/rest` directory.
-* **Mongo**: This is a DB instance running on port 27017. Django views connect to this instance of Mongo.
-
-We highly recommend you go through the setup in `Dockerfile` and `docker-compose.yml`. If you are able to understand and explain the setup, that will be a huge differentiator.
-
----
 
 # Problems Encountered & Solutions
 
@@ -95,7 +55,7 @@ docker-compose up -d app
 
 ---
 
-## Problem 3: React Hook Dependency Warning ⚠️
+## Problem 3: React Hook Dependency Warning 
 
 ### Issue
 React compilation warning:
@@ -359,11 +319,11 @@ export function App() {
 ```
 
 **Key Features**:
-- ✅ React Hooks only (no class components)
-- ✅ Custom hook for API logic (separation of concerns)
-- ✅ Loading and error states
-- ✅ Automatic list refresh after creation
-- ✅ Input validation
+-  React Hooks only (no class components)
+-  Custom hook for API logic (separation of concerns)
+-  Loading and error states
+-  Automatic list refresh after creation
+-  Input validation
 
 # Instructions [IMPORTANT] 
 
