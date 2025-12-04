@@ -1,0 +1,42 @@
+services:
+  api:
+    build: .
+    container_name: api
+    command: bash -c "cd /src/rest && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    volumes:
+      - ${ADBREW_CODEBASE_PATH}/tmp:/tmp
+      - ${ADBREW_CODEBASE_PATH}:/src
+    networks:
+      - adb_test_network
+
+  app:
+    build: .
+    container_name: app
+    command: bash -c "cd /src/app && yarn install && yarn start"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ${ADBREW_CODEBASE_PATH}:/src
+    networks:
+      - adb_test_network
+
+  mongo:
+    build: .
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ${ADBREW_CODEBASE_PATH}/db/:/data/db
+      - ${ADBREW_CODEBASE_PATH}/../libs:/usr/local/lib/libs:ro
+    command: bash -c "if [ ! -f /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1 ]; then cp /usr/local/lib/libs/usr/lib/x86_64-linux-gnu/* /usr/lib/x86_64-linux-gnu/ 2>/dev/null || true; ldconfig; fi && /usr/bin/mongod --bind_ip 0.0.0.0"
+    networks:
+      - adb_test_network
+
+networks:
+  adb_test_network:
+    driver: bridge
